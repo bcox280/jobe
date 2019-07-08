@@ -20,12 +20,13 @@ class C_Task extends Task {
             '-Wall',
             '-Werror',
             '-std=c99',
-		'-lcheck',
-		'-lm',
-		'-lpthread',
-		'-lrt',
-		'-lsubunit',
             '-x c');
+	$this->default_params['linkargs'] = array(
+			'-lcheck',
+			'-lm',
+			'-lpthread',
+			'-lrt',
+			'-lsubunit');
     }
 
     public static function getVersionCommand() {
