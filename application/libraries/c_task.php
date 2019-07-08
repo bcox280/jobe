@@ -24,7 +24,7 @@ class C_Task extends Task {
 		'-lm',
 		'-lpthread',
 		'-lrt',
-		'lsubunit',
+		'-lsubunit',
             '-x c');
     }
 
