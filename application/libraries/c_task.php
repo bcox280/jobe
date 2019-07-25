@@ -18,7 +18,6 @@ class C_Task extends Task {
         parent::__construct($filename, $input, $params);
         $this->default_params['compileargs'] = array(
             '-Wall',
-            '-Werror',
             '-std=c99',
             '-x c');
 	$this->default_params['linkargs'] = array(
