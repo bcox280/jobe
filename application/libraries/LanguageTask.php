@@ -176,7 +176,7 @@ abstract class Task {
     public function close($deleteFiles = true) {
 
         if ($this->userId !== null) {
-            exec("sudo /usr/bin/pkill -9 -u {$this->user}"); // Kill any remaining processes
+            exec("/usr/bin/pkill -9 -u {$this->user}"); // Kill any remaining processes
             $this->removeTemporaryFiles($this->user);
             $this->freeUser($this->userId);
             $this->userId = null;
@@ -185,7 +185,7 @@ abstract class Task {
 
         if ($deleteFiles && $this->workdir) {
             $dir = $this->workdir;
-            exec("sudo rm -R $dir");
+            exec("rm -R $dir");
             $this->workdir = null;
         }
     }
@@ -278,7 +278,7 @@ abstract class Task {
         $cputime = $this->getParam('cputime', $iscompile);
         $numProcs = $this->getParam('numprocs', $iscompile) + 1; // The + 1 allows for the sh command below.
         $sandboxCommandBits = array(
-                "sudo " . dirname(__FILE__)  . "/../../runguard/runguard",
+                " " . dirname(__FILE__)  . "/../../runguard/runguard",
                 "--user={$this->user}",
                 "--group=jobe",
                 "--time=$cputime",         // Seconds of execution time allowed
@@ -469,7 +469,7 @@ abstract class Task {
         $path = $CI->config->item('clean_up_path');
         $dirs = explode(';', $path);
         foreach($dirs as $dir) {
-            exec("sudo /usr/bin/find $dir/ -user $user -delete");
+            exec("/usr/bin/find $dir/ -user $user -delete");
         }
     }
 
